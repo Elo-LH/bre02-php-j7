@@ -5,6 +5,11 @@ if (isset($_SESSION['user'])){
     $lastName = $_SESSION['user']['lastName'];
     echo "<p>Welcome $firstName $lastName </p>";
 
+    if($_SESSION['user']['role']==="admin"){
+        ?>
+       <a href="index.php?route=admin">Manage users</a>
+        <?php
+    };
     ?>
 <a href="index.php?route=logout">Logout</a>
     <?php

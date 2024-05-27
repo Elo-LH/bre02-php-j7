@@ -29,6 +29,7 @@ echo "user not found";
    $_SESSION['user'] = [
 'firstName' => $user['first_name'],
 'lastName' => $user['last_name'],
+'role' => $user['role']
     ];
     }else {
         echo "wrong pasword";

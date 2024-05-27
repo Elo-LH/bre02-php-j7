@@ -17,6 +17,8 @@ if($route === null || preg_match("/home/", $route) ){
     require "login.phtml";
 }else if(preg_match("/logout/", $route)){
     require "logout.phtml";
+}else if(preg_match("/admin/", $route)){
+    require "admin.phtml";
 }
  
 ?>

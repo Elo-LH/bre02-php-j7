@@ -1,66 +1,61 @@
 <?php
-if (array_filter($_SESSION) && $_SESSION['user']['role'] === 'admin'){
+//if user identified has admin role, display all users in table
+if (array_filter($_SESSION) && $_SESSION['user']['role'] === 'admin') {
 
 ?>
-<h1>Admin</h1>
-
-<h2>Users Table:</h2>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Role</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-
-
-<?php 
-
-$query = $db->prepare('SELECT * FROM users');
-$parameters = [
-];
-$query->execute($parameters);
-$users = $query->fetchAll(PDO::FETCH_ASSOC);
-foreach($users as $user){
-    ?>
-    <tr>
-        <td><?=$user['id']?></td>
-        <td><?=$user['email']?></td>
-        <td><?=$user['first_name']?></td>
-        <td><?=$user['last_name']?></td>
-        <td><?=$user['role']?></td>
-        <td><a href="./logic/admin.php?delete=<?=$user['email']?>">Delete</a> <?php
-        if($user['role'] === 'admin'){
-            ?>
-            <a href="./logic/admin.php?toggleAdmin=true&email=<?=$user['email']?>">Delete admin rights</a>
+    <h1>Admin</h1>
+    <h2>Users Table:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
-        }else{
-?>
-            <a href="./logic/admin.php?toggleAdmin=false&email=<?=$user['email']?>">Give admin rights</a>
-
+            $query = $db->prepare('SELECT * FROM users');
+            $parameters = [];
+            $query->execute($parameters);
+            $users = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($users as $user) {
+            ?>
+                <tr>
+                    <td><?= $user['id'] ?></td>
+                    <td><?= $user['email'] ?></td>
+                    <td><?= $user['first_name'] ?></td>
+                    <td><?= $user['last_name'] ?></td>
+                    <td><?= $user['role'] ?></td>
+                    <td><a href="./logic/admin.php?delete=<?= $user['email'] ?>">Delete</a>
+                        <?php
+                        if ($user['role'] === 'admin') {
+                        ?>
+                            <a href="./logic/admin.php?toggleAdmin=true&email=<?= $user['email'] ?>">Delete admin rights</a>
+                        <?php
+                        } else {
+                        ?>
+                            <a href="./logic/admin.php?toggleAdmin=false&email=<?= $user['email'] ?>">Give admin rights</a>
+                        <?php
+                        }
+                        ?>
+                    </td>
+                </tr>
+            <?php
+            } ?>
+        </tbody>
+    </table>
 <?php
-        }
-        
-        
-        ?></td>
-    </tr>
-    
-    <?php
-}}else{
-  ?>
-  <p>You have no admin rights !</p>
-  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWUyOTJpNGRta2Z0ZDBqYjl2bnQ2dXRxdDl0dDhudHFzNDN5dnBwaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RX3vhj311HKLe/giphy.gif" alt="">
-  <br>
-  <?php 
+    //If no admin indentified give error message
+} else {
+?>
+    <p>You have no admin rights !</p>
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWUyOTJpNGRta2Z0ZDBqYjl2bnQ2dXRxdDl0dDhudHFzNDN5dnBwaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RX3vhj311HKLe/giphy.gif" alt="">
+    <br>
+<?php
 }
 ?>
-
-</tbody>
-</table>
-
 <a href="./index.php?route=home">Back to Home</a>

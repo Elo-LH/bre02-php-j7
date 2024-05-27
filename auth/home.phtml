@@ -1,26 +1,25 @@
 <h1>Home</h1>
 <?php
-if (isset($_SESSION['user'])){
+//if user authentified, personnalize greetings
+if (isset($_SESSION['user'])) {
     $firstName = $_SESSION['user']['firstName'];
     $lastName = $_SESSION['user']['lastName'];
     echo "<p>Welcome $firstName $lastName </p>";
 
-    if($_SESSION['user']['role']==="admin"){
-        ?>
-       <a href="index.php?route=admin">Manage users</a>
-        <?php
+    //if user has admin role, add a link to admin page
+    if ($_SESSION['user']['role'] === "admin") {
+?>
+        <a href="index.php?route=admin">Manage users</a>
+    <?php
     };
     ?>
-<a href="index.php?route=logout">Logout</a>
-    <?php
-}else {
-    
-    ?>
+    <a href="index.php?route=logout">Logout</a>
+<?php
+} else {
+?>
     <p>Welcome</p>
     <a href="index.php?route=inscription">Register</a>
-<a href="index.php?route=connexion">Login</a>
-    <?php
+    <a href="index.php?route=connexion">Login</a>
+<?php
 }
 ?>
-
-

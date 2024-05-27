@@ -2,41 +2,42 @@
 session_start();
 require "../connexion.php";
 
-if (!array_filter($_POST)){
+// Check if data received from from
+if (!array_filter($_POST)) {
     echo "no data from from";
-}else{
+} else {
     print_r($_POST);
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-    
-};
+    // Format post data from register form
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
-$query = $db->prepare('SELECT * FROM users WHERE email = :email');
-$parameters = [
-    'email' => $email,
-];
-$query->execute($parameters);
-$user = $query->fetch(PDO::FETCH_ASSOC);
-
-if (!$user){
-echo "user not found";
-}else {
-    var_dump($user);
-    $isPasswordCorrect = password_verify($password, $user['password']);
-    if($isPasswordCorrect){
-        echo "user found";
-   $_SESSION['user'] = [
-'firstName' => $user['first_name'],
-'lastName' => $user['last_name'],
-'role' => $user['role']
+    // Fetching if this email is in th db
+    $query = $db->prepare('SELECT * FROM users WHERE email = :email');
+    $parameters = [
+        'email' => $email,
     ];
-    }else {
-        echo "wrong pasword";
-    };
-}
+    $query->execute($parameters);
+    $user = $query->fetch(PDO::FETCH_ASSOC);
 
 
+    if (!$user) {
+        echo "user not found";
+    } else {
+        //Si l'email est enregistré dans la DB, vérifier que le mot de passe correspond
+        var_dump($user);
+        $isPasswordCorrect = password_verify($password, $user['password']);
+        if ($isPasswordCorrect) {
+            //Si le mot de passe est bon, enregistrer l'user connecté en session
+            echo "user found";
+            $_SESSION['user'] = [
+                'firstName' => $user['first_name'],
+                'lastName' => $user['last_name'],
+                'role' => $user['role']
+            ];
+        } else {
+            echo "wrong pasword";
+        };
+    }
+};
 header('Location: ../index.php?route=home');
-
-?>

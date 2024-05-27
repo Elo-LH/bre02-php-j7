@@ -1,25 +1,24 @@
-
 <h1>Register</h1>
 <?php
-if (isset($_GET['error'])){
+if (isset($_GET['error'])) {
 ?>
-<p>L'email "<?=$_GET['error']?>" est déjà utilisé</p>
-<p>Veuillez en saisir un autre ou vous connecter via la page Login.</p>
+    <p>L'email "<?= $_GET['error'] ?>" est déjà utilisé</p>
+    <p>Veuillez en saisir un autre ou vous connecter via la page Login.</p>
 <?php
 }
 ?>
 <form action="./logic/register.php" method="post">
-<label for="first_name">First Name:</label>
-<input type="text" name="first_name" id="first_name" required>
-<label for="last_name">Last Name:</label>
-<input type="text" name="last_name" id="last_name" required>
-<label for="email">Email:</label>
-<input type="email" name="email" id="email" required>
-<label for="password">Password:</label>
-<input type="password" name="password" id="password" required>
-<button type="submit">Submit
-    <img src="https://media1.tenor.com/m/X7gCi8NE_h4AAAAd/cat-funny.gif" alt="" style="width:50px;">
-</button>
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" id="first_name" required>
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" id="last_name" required>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required>
+    <button type="submit">Submit
+        <img src="https://media1.tenor.com/m/X7gCi8NE_h4AAAAd/cat-funny.gif" alt="" style="width:50px;">
+    </button>
 </form>
 
 <a href="./index.php?route=home">Back to Home</a>

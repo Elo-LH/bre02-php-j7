@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['user']['role'] === 'admin'){
+if (array_filter($_SESSION) && $_SESSION['user']['role'] === 'admin'){
 
 ?>
 <h1>Admin</h1>
@@ -34,13 +34,15 @@ foreach($users as $user){
         <td><?=$user['first_name']?></td>
         <td><?=$user['last_name']?></td>
         <td><?=$user['role']?></td>
-        <td><button>Modify</button><button>Delete</button></td>
+        <td><a href="./logic/admin.php?delete=<?=$user['email']?>">Delete</a></td>
     </tr>
     
     <?php
 }}else{
   ?>
   <p>You have no admin rights !</p>
+  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWUyOTJpNGRta2Z0ZDBqYjl2bnQ2dXRxdDl0dDhudHFzNDN5dnBwaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RX3vhj311HKLe/giphy.gif" alt="">
+  <br>
   <?php 
 }
 ?>

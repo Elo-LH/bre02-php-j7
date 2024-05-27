@@ -4,7 +4,7 @@ if (!array_filter($_GET)){
    $nickname = "guest";
   }else{
       if(isset($_GET['nickname'])){
-         
+        $_SESSION["nickname"]=$_GET['nickname'];
            $nickname = $_GET['nickname'];
          }
       
@@ -21,5 +21,6 @@ if (!array_filter($_GET)){
   </head>
   <body>
     <h1>Welcome <?=$nickname?></h1>
+    <a href="logout.php">Déconnexion</a>
   </body>
   </html>

@@ -1,6 +1,11 @@
 <?php
 session_start();
 
-require "nickname.php"
+if (isset($_SESSION['nickname'])){
+require "welcome.php";
+}else {
+    require "nickname.php";
+};
+
 
 ?>

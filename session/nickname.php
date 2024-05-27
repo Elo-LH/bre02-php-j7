@@ -10,6 +10,7 @@
 <label for="nickname">Choose a nickname:</label>
 <input type="text" name="nickname" id="nickname">
 <button>Enter site</button>
+
     </form>
     
 </body>

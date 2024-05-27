@@ -1,3 +1,12 @@
 <h1>Home</h1>
+<?php
+if (isset($_SESSION['user'])){
+    $firstName = $_SESSION['user']['firstName'];
+    $lastName = $_SESSION['user']['lastName'];
+    echo "<p>Welcome $firstName $lastName </p>";
+}else {
+    echo "Welcome";
+}
+?>
 <a href="index.php?route=inscription">Register</a>
 <a href="index.php?route=connexion">Login</a>

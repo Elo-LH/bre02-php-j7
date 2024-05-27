@@ -13,11 +13,29 @@ $parameters = [
 $query->execute($parameters);
 $isUserDeleted = $query->fetch(PDO::FETCH_ASSOC);
 
-    }else{
+    }else if(isset($_GET['toggleAdmin'])){
+        $isAdmin= $_GET['toggleAdmin'];
+        $email = $_GET['email'];
+      if($isAdmin === "true"){
       
+        $query = $db->prepare('UPDATE users SET role= null WHERE email = :email');
+        $parameters = [
+            'email' => $email,
+        ];
+        $query->execute($parameters);
+        $isAdminDeleted = $query->fetch(PDO::FETCH_ASSOC);
+      }else{
+    
+        $query = $db->prepare('UPDATE users SET role= "admin" WHERE email = :email');
+        $parameters = [
+            'email' => $email,
+        ];
+        $query->execute($parameters);
+        $isAdminAdded = $query->fetch(PDO::FETCH_ASSOC);
+      }
     };
 }
 
-header('Location: ../index.php?route=admin');
+ header('Location: ../index.php?route=admin');
 
 ?>

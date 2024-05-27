@@ -34,7 +34,20 @@ foreach($users as $user){
         <td><?=$user['first_name']?></td>
         <td><?=$user['last_name']?></td>
         <td><?=$user['role']?></td>
-        <td><a href="./logic/admin.php?delete=<?=$user['email']?>">Delete</a></td>
+        <td><a href="./logic/admin.php?delete=<?=$user['email']?>">Delete</a> <?php
+        if($user['role'] === 'admin'){
+            ?>
+            <a href="./logic/admin.php?toggleAdmin=true&email=<?=$user['email']?>">Delete admin rights</a>
+            <?php
+        }else{
+?>
+            <a href="./logic/admin.php?toggleAdmin=false&email=<?=$user['email']?>">Give admin rights</a>
+
+<?php
+        }
+        
+        
+        ?></td>
     </tr>
     
     <?php
